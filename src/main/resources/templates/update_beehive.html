@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update Beehive</title>
+    <script src="https://kit.fontawesome.com/80c816529f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/add_style.css}" />
+<!--     <link rel="stylesheet" href="/../static/css/add_style.css" />-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <body>
+        <div class="logo">
+            <h1>BEEHIVE MANAGER <i class="fas fa-archive"></i></h1>
+        </div>
+        <div class="page_title">
+            <h2 th:text="'UPDATE INFORMATION ABOUT BEEHIVE NO. '+${beehiveID}"></h2>
+        </div>
+        
+        <div class="wrapper">
+        <form class="forms" action="#" th:action="@{/beehive/update/{id}(id=${beehive.getId()})}" th:object="${beehive}" method="get">
+
+            <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            </ul>
+
+            <div>
+                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{number}" />
+                <input type="hidden" th:field="*{type}" />
+                <input type="hidden" th:field="*{establishDate}" />
+            </div>
+
+            <div>
+                <label for="checkupdate">Last check-up date:</label>
+                <input type="date" th:field="*{lastCheckUpDate}" id="checkupdate" placeholder="Check-Up Date" />
+            </div>
+
+            <div>
+                <label>Mark:</label>
+                <select th:field="*{mark}">
+                    <option th:each="markk : ${allMarks}" th:value="${markk}" th:text="${markk}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label th:for="${#ids.next('queen')}">
+                    <!--th:text="#{beehive.queen}" PO CO TO TU JEST!!!-->
+                    Queen included:
+                </label>
+                <input type="checkbox" th:field="*{queen}" />
+            </div>
+
+            <button class="add_button" type="submit">UPDATE</button>
+
+        </form>
+            <a href="/beehive">
+                <button class="add_button" type="submit">HOME</button>
+            </a>
+    </div>
+    </body>
+    </html>
+
+</body>
+
+</html>

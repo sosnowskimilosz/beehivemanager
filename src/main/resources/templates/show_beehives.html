@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<script src="https://kit.fontawesome.com/80c816529f.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/css/index_style.css}"/>
+<!-- <link rel="stylesheet" href="/../static/css/index_style.css"/> -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+<title>Beehive Manager</title>
+
+</head>
+
+<body>
+<div class="logo">
+    <h1>BEEHIVE MANAGER <i class="fas fa-archive"></i></h1>
+</div>
+<div class="page_title">
+    <h2> ALL YOUR BEEHIVES</h2>
+</div>
+<main class="main">
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Establish date</th>
+                <th>Queen included</th>
+                <th>Last check-up</th>
+                <th>Mark</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+
+            <tr th:each="beehive: ${allBeehives}">
+
+                <td th:text="${beehive.getNumber()}"></td>
+                <td th:text="${beehive.getType()}"></td>
+                <td th:text="${beehive.getEstablishDate()}"></td>
+                <td th:text="${beehive.getQueen()}"></td>
+                <td th:text="${beehive.getLastCheckUpDate()}"></td>
+                <td th:text="${beehive.getMark()}"></td>
+                <td>
+                    <form class="table_form" th:action="@{/beehive/edit/{id}(id=${beehive.getId()})}" method="get">
+                        <button type="submit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form class="table_form" th:action="@{/beehive/delete-by-id/{id}(id=${beehive.getId()})}"
+                          method="get">
+                        <button type="submit">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="add_button">
+        <a href="/beehive/signup">
+            <button href="/beehive/signup">ADD NEW BEEHIVE</button>
+        </a>
+
+        <a href="/logout">
+            <button>LOGOUT</button>
+        </a>
+
+    </div>
+</main>
+<div class="pagination" th:if="${totalPages>1}">
+    <div class = "row col-sm-10">
+        <div class = "col-sm-2">
+            Total Rows: [[${totalItems}]]
+        </div>
+        <div class = "col-sm-1">
+             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                 <a th:if="${currentPage != i}" th:href="@{'/beehive/page/' + ${i}}">[[${i}]]</a>
+                 <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+             </span>
+        </div>
+
+        <div class = "col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/beehive/page/' + ${currentPage+1}}">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+
+        <div class = "col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/beehive/page/' + ${totalPages}}">Last</a>
+            <span th:unless="${currentPage < totalPages}">Last</span>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

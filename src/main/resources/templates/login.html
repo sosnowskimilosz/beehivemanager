@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/80c816529f.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <!-- <link rel="stylesheet" href="/../static/css/login.css"/> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Login to Beehive Manager</title>
+</head>
+<body>
+<div class="logo">
+    <h1>BEEHIVE MANAGER <i class="fas fa-archive"></i></h1>
+</div>
+<div class="page_title">
+    <h2>Login to Beehive Manager </h2>
+</div>
+
+<div class="wrapper">
+    <form class="forms" method="post" action="/login">
+        <p>
+            <label for="username" class="">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        </p>
+        <p>
+            Remember me?
+            <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
+        </p>
+        <button class="login_button" type="submit">LOGIN</button>
+    </form>
+</div>
+
+</body>
+</html>

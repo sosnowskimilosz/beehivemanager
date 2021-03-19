@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/80c816529f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Hello!</title>
+    <!--<link rel="stylesheet" href="style.css" />-->
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .background {
+         background-image: url("/img/background5.jpg");
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-position: center;
+        }
+    </style>
+
+  </head>
+
+  <body class="background">
+
+    <main class="frame">
+      <section class="about_me">
+        <img src="/img/photo.jpg" alt="photo" />
+        <h1 class="name">Miłosz Sosnowski</h1>
+        <h3 class="occupation">Junior Java Developer</h3>
+        <p class="text">
+          Hi, my name is Miłosz and I'm passionate about programming in Java. On
+          this site I want to present my skills and show my mini-pojects.
+        </p>
+        <p class="text2">
+          If you like my work and you are interested in inviting me to an
+          inteview, please do not hesitate to contact me.
+        </p>
+      </section>
+      <div class="other">
+        <header class="project_section">
+          <h1>Projects</h1>
+          <div class="project-button">
+            <a href="/index"><button class="beehive_button">Beehive Manager</button></a>
+<!--            <button class="training_button">Training Manager</button>-->
+          </div>
+        </header>
+
+        <footer class="contact-section">
+          <h1>Contact me</h1>
+          <ul class="contact-links">
+            <li>
+              <a class="link" href="tel:535329954"
+                ><i class="fas fa-mobile-alt"></i
+              ></a>
+            </li>
+            <li>
+              <a class="link" href="https://github.com/sosnowskimilosz"
+                ><i class="fab fa-github-square"></i
+              ></a>
+            </li>
+            <li>
+              <a class="link" href="mailto: sosnowskimilosz@gmail.com"
+                ><i class="fas fa-envelope"></i
+              ></a>
+            </li>
+          </ul>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

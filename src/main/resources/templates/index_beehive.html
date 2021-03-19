@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<script src="https://kit.fontawesome.com/80c816529f.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/css/index_style.css}"/>
+<!-- <link rel="stylesheet" href="/../static/css/index_style.css"/> -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+<title>Beehive Manager</title>
+
+<style>
+    .links{
+        font-family: "Concert One", cursive;
+        text-align: center;
+        font-size: 1.5rem;
+        color: rgb(235, 92, 71);
+        width: 300px;
+        margin: auto;
+        border: 3px solid rgb(235, 92, 71);
+        padding: 10px;
+    }
+
+    .button {
+        width: 100%;
+        font-family: "Concert One", cursive;
+        border-radius: 7px;
+        font-size: 20px;
+        text-align: center;
+        background-color: rgb(235, 92, 71);
+        border: none;
+        color: rgb(0, 0, 0);
+        padding: 10px 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        width: 100%;
+        font-family: "Concert One", cursive;
+        border-radius: 7px;
+        font-size: 20px;
+        text-align: center;
+        background-color: rgba(235, 93, 71, 0.65);
+        border: none;
+        color: rgb(0, 0, 0);
+        padding: 10px 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="logo">
+    <h1>BEEHIVE MANAGER <i class="fas fa-archive"></i></h1>
+</div>
+<div class="page_title">
+    <h2>WELCOME!</h2>
+</div>
+<main class="links">
+
+    <a href="/register"><button class="button"><h3>REGISTRATION</h3></button></a>
+        <a href="/login"><button class="button"><h3>LOG IN</h3></button></a>
+
+</main>
+
+</body>
+
+</html>

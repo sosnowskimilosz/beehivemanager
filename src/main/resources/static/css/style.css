@@ -1,0 +1,160 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  font-family: "Poppins", sans-serif;
+}
+
+.frame {
+  display: flex;
+  width: 65%;
+  margin: auto;
+
+  margin-top: 7%;
+  margin-bottom: 15%;
+}
+
+.frame .about_me img{
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  margin-top: 5%;
+  object-fit: cover;
+  object-position: 0 -8px;
+}
+
+.name,
+.occupation,
+.text,
+.text2 {
+  color: white;
+}
+
+.name{
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.occupation{
+  margin-top: 0px;
+}
+
+.about_me {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  margin: 0 10px 0 0;
+}
+
+.about_me p {
+  margin: 10px 30px 0px 30px;
+  font-size: 0.9rem;
+  font-weight: 300;
+  padding-bottom: 20px;
+}
+
+.other {
+  flex: 1;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  flex-direction: column;
+  margin: 0 0 0 10px;
+}
+
+.project_section h1 {
+  color: white;
+  font-size: 25px;
+  padding-top: 10%;
+  padding-bottom: 5%;
+}
+
+.project_links button {
+  margin: 60%;
+   color: white;
+}
+
+.contact-section {
+  margin-top: 10%;
+  color: white;
+  position: relative;
+}
+
+.contact-section h1 {
+  font-size: 25px;
+  padding-top: 25px;
+  color: white;
+}
+
+.project-button {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.project-button button {
+  border: 3px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  width: 150px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.contact-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  justify-content: center;
+  margin: auto;
+  font-size: 2rem;
+}
+
+.contact-links li {
+  padding: 0 20px 20px 20px;
+}
+
+.link {
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .frame {
+    margin-top: 5%;
+    flex-direction: column;
+  }
+
+  .other,
+  .about_me {
+    margin: 20px 0  20px 0;
+    text-align: center;
+  }
+
+  .about_me {
+    height: 80vh;
+  }
+
+  .about_me p {
+    font-size: smaller;
+  }
+}

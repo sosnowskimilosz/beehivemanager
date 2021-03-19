@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<title>Add new Beehive</title>
+<script src="https://kit.fontawesome.com/80c816529f.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/css/add_style.css}"/>
+<!-- <link rel="stylesheet" href="/../static/css/add_style.css" /> -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="logo">
+        <h1>BEEHIVE MANAGER <i class="fas fa-archive"></i></h1>
+    </div>
+
+    <div class="page_title">
+        <h2> ADD NEW BEEHIVE</h2>
+    </div>
+    <div class="wrapper">
+        <form class="forms" action="#" th:action="@{/beehive/addnew}" th:object="${beehive}" method="post">
+
+            <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            </ul>
+
+            <div>
+                <label for="numberbeehive">Number:</label>
+                <input type="text" th:field="*{number}" id="numberbeehive" placeholder="Number">
+            </div>
+
+            <div>
+                <label for="estdate">Establish date:</label>
+                <input type="date" th:field="*{establishDate}" id="estdate" placeholder="Date" />
+            </div>
+
+            <div>
+                <label for="checkupdate">Last check-up date:</label>
+                <input type="date" th:field="*{lastCheckUpDate}" id="checkupdate" placeholder="Check-Up Date" />
+            </div>
+
+            <div>
+                <label>Select one type:</label>
+                <select th:field="*{type}">
+                    <option th:each="typename : ${allTypes}" th:value="${typename}" th:text="${typename}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Mark:</label>
+                <select th:field="*{mark}">
+                    <option th:each="markk : ${allMarks}" th:value="${markk}" th:text="${markk}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label th:for="${#ids.next('queen')}">
+                    <!--th:text="#{beehive.queen}" PO CO TO TU JEST!!!-->Queen included:
+                </label>
+                <input type="checkbox" th:field="*{queen}" />
+            </div>
+            <button class="add_button" type="submit">ADD</button>
+
+        </form>
+        <a href="/beehive">
+            <button class="add_button" type="submit">HOME</button>
+        </a>
+    </div>
+
+
+
+</body>
+
+</html>
