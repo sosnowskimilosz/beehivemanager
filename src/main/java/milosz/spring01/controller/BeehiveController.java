@@ -42,7 +42,7 @@ public class BeehiveController {
 
     @GetMapping("/beehive")
     public String viewHomePage(Model model) {
-        //model.addAttribute("allBeehives", beehiveService.getAllBeehives());
+
         return findPaginated(1,model);
     }
 
