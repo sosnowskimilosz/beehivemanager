@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -31,12 +32,12 @@ public class BeehiveController {
 
     @ModelAttribute("allTypes")
     public List<BeehiveType> populateTypes() {
-        return List.of(BeehiveType.values());
+        return Arrays.asList(BeehiveType.values());
     }
 
     @ModelAttribute("allMarks")
     public List<BeehiveMark> marks() {
-        return List.of(BeehiveMark.values());
+        return Arrays.asList(BeehiveMark.values());
     }
 
     @GetMapping("/beehive")
