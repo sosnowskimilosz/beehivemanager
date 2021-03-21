@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+//I would use simpler name - UserController
 @Controller
 public class NewUserController {
 
@@ -20,19 +21,28 @@ public class NewUserController {
 
     Logger logger= LoggerFactory.getLogger(NewUserController.class);
 
+    //Starting from Spring 4.2.3 you don't need to add @Autowired annotation
+    //Please look at https://javappa.com/kurs-spring/wstrzykiwanie-zaleznosci
+    //However you should use service where you inject repository (and avoid repository injection in controller)
     @Autowired
     public NewUserController(UserRepository repository) {
         this.repository = repository;
     }
 
+    //You should map this url using resource name so simply -> /registry
     @GetMapping("/register")
     public String getRegistryPage(Model model){
         model.addAttribute("user",new User());
         return "registry";
     }
 
+    //Current best practice is to use camelCase convention: registerUser
+    //Hovewer it would be better to use simply resource name in the plural name
+    //simply -> /users
+    //please look at https://javappa.com/kurs-aplikacji-web/starter
     @PostMapping("/register_user")
     public String registerNewUser(@Valid User user){
+        //This should be put in a separated security class
         PasswordConfig encoder = new PasswordConfig();
         String encodedPassword = encoder.passwordEncoder().encode(user.getPassword());
         user.setPassword(encodedPassword);
@@ -41,6 +51,7 @@ public class NewUserController {
         return "redirect:/registry_succeeded";
     }
 
+    //How about: /registry/view/succes
     @GetMapping("/registry_succeeded")
     public String viewRegistrySucceededPage() {
         return "registry_succeeded";
