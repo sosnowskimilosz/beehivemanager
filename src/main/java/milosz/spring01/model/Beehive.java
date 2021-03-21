@@ -16,7 +16,6 @@ public class Beehive {
     private Integer id;
 
     @NotEmpty(message = "Number is mandatory")
-    @Column(unique = true)
     private String number;
 
     private BeehiveType type;

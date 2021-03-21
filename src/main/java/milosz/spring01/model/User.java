@@ -70,7 +70,7 @@ public class User {
     }
 
     public void addBeehive(Beehive beehive) {
-        beehiveList.add(beehive);
+        this.beehiveList.add(beehive);
     }
 
     public void removeBeehive(Beehive beehive){

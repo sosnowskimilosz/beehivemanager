@@ -3,9 +3,6 @@ package milosz.spring01.service;
 import milosz.spring01.model.Beehive;
 import milosz.spring01.repository.BeehiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,9 +37,7 @@ public class BeehiveService {
         beehiveRepository.save(beehive);
     }
 
-
-    public Page<Beehive> findPaginate(int pageNumber,int pageSize){
-        Pageable pageable= PageRequest.of(pageNumber - 1,pageSize);
-        return this.beehiveRepository.findAll(pageable);
+    public List<Beehive> getBeehivesOfUser(Integer id){
+        return this.beehiveRepository.getBeehivesByUserId(id);
     }
 }

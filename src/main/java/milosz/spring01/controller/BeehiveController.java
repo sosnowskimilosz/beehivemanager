@@ -1,5 +1,7 @@
 package milosz.spring01.controller;
 
+import milosz.spring01.model.User;
+import milosz.spring01.repository.UserRepository;
 import milosz.spring01.service.BeehiveService;
 import milosz.spring01.model.BeehiveMark;
 import milosz.spring01.model.Beehive;
@@ -8,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,10 +27,14 @@ public class BeehiveController {
     @Autowired
     BeehiveService beehiveService;
 
-    Logger log= LoggerFactory.getLogger(BeehiveController.class);
+    @Autowired
+    UserRepository userRepository;
 
-    public BeehiveController(BeehiveService beehiveService) {
+    Logger log = LoggerFactory.getLogger(BeehiveController.class);
+
+    public BeehiveController(BeehiveService beehiveService, UserRepository userRepository) {
         this.beehiveService = beehiveService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("allTypes")
@@ -42,8 +49,14 @@ public class BeehiveController {
 
     @GetMapping("/beehive")
     public String viewHomePage(Model model) {
-
-        return findPaginated(1,model);
+        String nameOfLoggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        log.info("show name of user ->{}",nameOfLoggedInUser);
+        Integer id = userRepository.findIdOfUsername(nameOfLoggedInUser);
+        log.info("show id of user ->{}",id);
+        List<Beehive> beehives = beehiveService.getBeehivesOfUser(id);
+        log.info("show list of user ->{}",beehives);
+        model.addAttribute("allBeehives", beehives);
+        return "show_beehives";
     }
 
     @GetMapping("/beehive/delete-by-id/{id}")
@@ -62,6 +75,10 @@ public class BeehiveController {
         if (result.hasErrors()) {
             return "add_beehive";
         }
+        String nameOfLoggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        User loggedUser = userRepository.findByUsername(nameOfLoggedInUser);
+        loggedUser.addBeehive(beehive);
+        beehive.setUser(loggedUser);
         beehiveService.addBeehive(beehive);
         return "redirect:/beehive";
     }
@@ -69,7 +86,7 @@ public class BeehiveController {
     @GetMapping("/beehive/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Beehive beehive = beehiveService.getBeehiveWithId(id);
-        log.info("Beehive from repository -> {}",beehive);
+        log.info("Beehive from repository -> {}", beehive);
         model.addAttribute("beehiveID", beehive.getId());
         model.addAttribute("beehive", beehive);
         return "update_beehive";
@@ -81,19 +98,23 @@ public class BeehiveController {
             return "update_beehive";
         }
         beehiveService.updateBeehive(beehive);
-        log.info("Update beehive succeed -> {}",beehive);
+        log.info("Update beehive succeed -> {}", beehive);
         return "redirect:/beehive";
     }
 
-    @GetMapping("beehive/page/{pageNo}")
-    public String findPaginated(@PathVariable (value="pageNo") int pageNo, Model model){
-        int pageSize = 5;
-        Page<Beehive> page = beehiveService.findPaginate(pageNo,pageSize);
-        List<Beehive> beehives=page.getContent();
-        model.addAttribute("currentPage",pageNo);
-        model.addAttribute("totalPages",page.getTotalPages());
-        model.addAttribute("totalItems",page.getTotalElements());
-        model.addAttribute("allBeehives",beehives);
-        return "show_beehives";
-    }
+//    @GetMapping("beehive/page/{pageNo}")
+//    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+//        int pageSize = 5;
+//        String nameOfLoggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Integer id = userRepository.findIdOfUsername(nameOfLoggedInUser);
+//        log.info("USER NAME -> {}", nameOfLoggedInUser);
+//        log.info("USER ID -> {}", id);
+//        Page<Beehive> page = beehiveService.findPaginate(pageNo, pageSize);
+//        List<Beehive> beehives = page.getContent();
+//        model.addAttribute("currentPage", pageNo);
+//        model.addAttribute("totalPages", page.getTotalPages());
+//        model.addAttribute("totalItems", page.getTotalElements());
+//        model.addAttribute("allBeehives", beehives);
+//        return "show_beehives";
+//    }
 }
