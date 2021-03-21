@@ -77,7 +77,6 @@ public class User {
         beehiveList.remove(beehive);
     }
 
-
     @Override
     public String toString() {
         return "User{" +
